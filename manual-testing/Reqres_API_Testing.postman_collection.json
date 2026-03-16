@@ -183,6 +183,98 @@
               "response": []
             }
           ]
+        },
+        {
+          "name": "Login",
+          "item": [
+            {
+              "name": "TC-01_Login_Success",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://reqres.in/api/login",
+                  "protocol": "https",
+                  "host": [
+                    "reqres",
+                    "in"
+                  ],
+                  "path": [
+                    "api",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "TC-02_Login_MissingPassword",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n     \"email\": \"eve.holt@reqres.in\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://reqres.in/api/login",
+                  "protocol": "https",
+                  "host": [
+                    "reqres",
+                    "in"
+                  ],
+                  "path": [
+                    "api",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "TC-03_Login_UserNotFound",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"fake@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://reqres.in/api/login",
+                  "protocol": "https",
+                  "host": [
+                    "reqres",
+                    "in"
+                  ],
+                  "path": [
+                    "api",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
         }
       ],
       "auth": {
