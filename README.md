@@ -1,36 +1,37 @@
-# QA API Testing Portfolio - Reqres
+# API Automation Framework: RESTful Testing Portfolio
 
-This repository showcases my professional skills in **API Testing**, covering both manual exploration and structured documentation. I use the [Reqres.in](https://reqres.in/) API as a sandbox to demonstrate test planning, bug reporting, and security mindset.
+This repository showcases a professional **Behavior-Driven Development (BDD)** framework designed for API testing. The project utilizes **Python**, **Behave**, and the **Requests** library to validate RESTful services.
 
----
-
-## Project Structure
-
-The project is organized into logical modules to ensure scalability and clarity:
-
-* **`manual-testing/`**: 
-    * `Reqres_API_Testing.postman_collection.json`: Complete Postman collection with 9+ test cases.
-    * `Test_Plan.md`: Detailed strategy, including Happy Paths and Negative Testing.
-* **`automation-testing/`**: *(In Progress)* Future automated scripts using Python/Requests.
+## Project Architecture
+The framework is built with a modular and scalable structure:
+* **`features/`**: Contains Gherkin scenarios defined in plain English.
+* **`features/steps/`**: Business logic implementation using Python.
+* **`features/environment.py`**: Automated hooks for logging and failure diagnostics.
+* **`manual-testing/`**: Documentation of manual test cases and identified vulnerabilities.
 
 ---
 
-## Testing Scope
+## Automation Strategy
+A **Unified Criterion** was established to handle multiple HTTP methods within a single execution suite:
 
-I have focused on three main areas of the User Management module:
-1.  **Data Retrieval**: Validating query parameters and endpoint integrity.
-2.  **Resource Creation**: Testing payload boundaries, empty objects, and data types.
-3.  **Authentication**: Identifying security flaws in the Login flow (Token generation and field validation).
+* **Resource Retrieval (GET)**: Validation of data integrity and status codes for existing resources.
+* **Resource Creation (POST)**: Verification of payload processing and the issuance of unique resource identifiers.
+* **Global Assertions**: Reusable validation steps were implemented to ensure the presence of required JSON fields and correct HTTP status codes.
+
+---
+
+## Technical Decisions & Challenges
+During the development phase, the following engineering choices were made:
+
+1. **Environment Migration**: The test environment was migrated to **JSONPlaceholder** to ensure framework stability and mitigate 403 Forbidden errors caused by third-party WAF (Web Application Firewall) restrictions.
+2. **Impersonal Logging**: An automated logging system was integrated via `environment.py` to capture response bodies during failed steps, facilitating rapid root-cause analysis.
+3. **DRY Principle**: Step definitions were centralized in `api_steps.py` to prevent code duplication and enhance maintainability.
 
 ---
 
-## How to Run the Tests
+## Installation & Execution
 
-1.  **Postman**:
-    * Import the `.json` file located in `manual-testing/`.
-    * Set up a **Postman Environment** with the variable `{{x-api-key}}`.
-    * Run the collection manually or using the Postman Runner.
-2.  **Documentation**:
-    * Review the `Test_Plan.md` for a full breakdown of expected vs. actual results.
-
----
+1. **Clone the repository**:
+   ```bash
+   git clone <your-repository-url>
+   cd <project-folder>
