@@ -1,38 +1,48 @@
-# API Automation Framework: RESTful Testing Portfolio
+# Hybrid API Automation Portfolio: Python (BDD) & Postman
 
-This repository showcases a professional **Behavior-Driven Development (BDD)** framework designed for API testing. The project utilizes **Python**, **Behave**, and the **Requests** library to validate RESTful services.
+This repository demonstrates a dual-strategy approach to **API Quality Assurance**. A professional automation framework constructed with **Python and Behave** is presented, complemented by an advanced **Postman Collection**, both targeting the **JSONPlaceholder API**.
 
 ## Project Architecture
-The framework is built with a modular and scalable structure:
-* **`features/`**: Contains Gherkin scenarios defined in plain English.
-* **`features/steps/`**: Business logic implementation using Python.
-* **`features/environment.py`**: Automated hooks for logging and failure diagnostics.
-* **`manual-testing/`**: Documentation of manual test cases and identified vulnerabilities.
+The repository is structured to showcase proficiency in two distinct automation stacks:
+
+* **`automation-python/`**: A BDD framework utilizing **Python**, **Behave (Gherkin)**, and the **Requests** library.
+* **`manual-testing/`**: Strategic documentation including the **Test Plan** and environmental constraint analysis.
 
 ---
 
-## Automation Strategy
-A **Unified Criterion** was established to handle multiple HTTP methods within a single execution suite:
-
-* **Resource Retrieval (GET)**: Validation of data integrity and status codes for existing resources.
-* **Resource Creation (POST)**: Verification of payload processing and the issuance of unique resource identifiers.
-* **Global Assertions**: Reusable validation steps were implemented to ensure the presence of required JSON fields and correct HTTP status codes.
-
----
-
-## Technical Decisions & Challenges
-During the development phase, the following engineering choices were made:
-
-1. **Environment Migration**: The test environment was migrated to **JSONPlaceholder** to ensure framework stability and mitigate 403 Forbidden errors caused by third-party WAF (Web Application Firewall) restrictions.
-2. **Impersonal Logging**: An automated logging system was integrated via `environment.py` to capture response bodies during failed steps, facilitating rapid root-cause analysis.
-3. **DRY Principle**: Step definitions were centralized in `api_steps.py` to prevent code duplication and enhance maintainability.
+## Stack 1: Python & Behave (BDD)
+Focus is placed on scalability and "Clean Code" principles:
+* **BDD Implementation**: Scenarios are defined in Gherkin to ensure high readability between technical and non-technical stakeholders.
+* **Defensive Programming**: The `getattr()` function is utilized for safe attribute retrieval, ensuring suite stability across execution cycles.
+* **Hooks & Environment**: Automated failure diagnostics are integrated via `environment.py`, allowing for the capture of prettified JSON response bodies upon assertion failure.
 
 ---
 
-## Installation & Execution
+## Stack 2: Postman & Newman
+Focus is placed on execution speed and integrated environment management:
+* **Dynamic Chaining**: The `id` from `POST` responses is captured to parameterize subsequent `GET` requests via `pm.environment.set()`.
+* **JavaScript Assertions**: Custom scripts are implemented for status code validation, schema integrity, and performance benchmarking (Response Time < 500ms).
+* **CLI Execution**: The collection is fully compatible with **Newman** for integration into CI/CD pipelines.
 
-1. **Clone the repository**:
+---
+
+## Strategic Findings: Statelessness Analysis
+The **stateless nature** of the JSONPlaceholder mock API was identified and documented:
+* **Observation**: Resources created via `POST` are simulated and are not physically persisted in the database.
+* **Test Design**: Both the Python framework and the Postman collection are engineered to detect the resulting **404 Not Found** status upon retrieval.
+* **Conclusion**: This demonstrates a robust diagnostic system that accurately reports system behavior rather than masking environmental limitations.
+
+---
+
+## Execution Instructions
+
+### Option A: Python (BDD)
+1. Dependencies are installed via: `pip install -r requirements.txt`
+2. The suite is executed using: `python -m behave --no-capture`
+
+### Option B: Postman
+1. The `.json` files are imported from the `/postman-collections` directory.
+2. The **`JSONPlaceholder-Env`** environment is selected.
+3. Execution is performed via **Collection Runner** or **Newman**:
    ```bash
-   git clone <your-repository-url>
-   cd <project-folder>
-
+   newman run postman-collections/collection.json -e postman-collections/environment.json
